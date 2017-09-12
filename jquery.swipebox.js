@@ -2,7 +2,7 @@
 
 ;( function ( window, document, $, undefined ) {
 
-	$.swipebox = function( elem, options ) {
+	$.swipeboxkuu = function( elem, options ) {
 
 		// Default options
 		var ui,
@@ -56,11 +56,11 @@
 
 		plugin.settings = {};
 
-		$.swipebox.close = function () {
+		$.swipeboxkuu.close = function () {
 			ui.closeSlide();
 		};
 
-		$.swipebox.extend = function () {
+		$.swipeboxkuu.extend = function () {
 			return ui;
 		};
 
@@ -150,7 +150,7 @@
 					plugin.settings.beforeOpen();
 				}
 				this.target.trigger( 'swipebox-start' );
-				$.swipebox.isOpen = true;
+				$.swipeboxkuu.isOpen = true;
 				this.build();
 				this.openSlide( index );
 				this.openMedia( index );
@@ -934,7 +934,7 @@
 					this.target.trigger( 'swipebox-destroy' );
 				}
 
-				$.swipebox.isOpen = false;
+				$.swipeboxkuu.isOpen = false;
 
 				if ( plugin.settings.afterClose ) {
 					plugin.settings.afterClose();
@@ -945,10 +945,10 @@
 		plugin.init();
 	};
 
-	$.fn.swipebox = function( options ) {
+	$.fn.swipeboxkuu = function( options ) {
 
 		if ( ! $.data( this, '_swipebox' ) ) {
-			var swipebox = new $.swipebox( this, options );
+			var swipebox = new $.swipeboxkuu( this, options );
 			this.data( '_swipebox', swipebox );
 		}
 		return this.data( '_swipebox' );
