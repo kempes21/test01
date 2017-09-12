@@ -38,19 +38,19 @@
 			winHeight = window.innerHeight ? window.innerHeight : $( window ).height(),
 			currentX = 0,
 			/* jshint multistr: true */
-			html = '<div id="swipebox-overlay">\
-					<div id="swipebox-container">\
-						<div id="swipebox-slider"></div>\
-						<div id="swipebox-top-bar">\
-							<div id="swipebox-title"></div>\
+			html = '<div id="swipeboxkuu-overlay">\
+					<div id="swipeboxkuu-container">\
+						<div id="swipeboxkuu-slider"></div>\
+						<div id="swipeboxkuu-top-bar">\
+							<div id="swipeboxkuu-title"></div>\
 						</div>\
-						<div id="swipebox-bottom-bar">\
-							<div id="swipebox-arrows">\
-								<a id="swipebox-prev"></a>\
-								<a id="swipebox-next"></a>\
+						<div id="swipeboxkuu-bottom-bar">\
+							<div id="swipeboxkuu-arrows">\
+								<a id="swipeboxkuu-prev"></a>\
+								<a id="swipeboxkuu-next"></a>\
 							</div>\
 						</div>\
-						<a id="swipebox-close"></a>\
+						<a id="swipeboxkuu-close"></a>\
 					</div>\
 			</div>';
 
@@ -143,13 +143,13 @@
 		ui = {
 
 			/**
-			 * Initiate Swipebox
+			 * Initiate swipeboxkuu
 			 */
 			init : function( index ) {
 				if ( plugin.settings.beforeOpen ) {
 					plugin.settings.beforeOpen();
 				}
-				this.target.trigger( 'swipebox-start' );
+				this.target.trigger( 'swipeboxkuu-start' );
 				$.swipeboxkuu.isOpen = true;
 				this.build();
 				this.openSlide( index );
@@ -170,19 +170,19 @@
 				$( 'body' ).append( html );
 
 				if ( supportSVG && plugin.settings.useSVG === true ) {
-					bg = $( '#swipebox-close' ).css( 'background-image' );
+					bg = $( '#swipeboxkuu-close' ).css( 'background-image' );
 					bg = bg.replace( 'png', 'svg' );
-					$( '#swipebox-prev, #swipebox-next, #swipebox-close' ).css( {
+					$( '#swipeboxkuu-prev, #swipeboxkuu-next, #swipeboxkuu-close' ).css( {
 						'background-image' : bg
 					} );
 				}
 
 				if ( isMobile && plugin.settings.removeBarsOnMobile ) {
-					$( '#swipebox-bottom-bar, #swipebox-top-bar' ).remove();
+					$( '#swipeboxkuu-bottom-bar, #swipeboxkuu-top-bar' ).remove();
 				}
 
 				$.each( elements,  function() {
-					$( '#swipebox-slider' ).append( '<div class="slide"></div>' );
+					$( '#swipeboxkuu-slider' ).append( '<div class="slide"></div>' );
 				} );
 
 				$this.setDim();
@@ -232,7 +232,7 @@
 					height : height
 				};
 
-				$( '#swipebox-overlay' ).css( sliderCss );
+				$( '#swipeboxkuu-overlay' ).css( sliderCss );
 
 			},
 
@@ -290,8 +290,8 @@
 					vSwipMinDistance = 50,
 					startCoords = {},
 					endCoords = {},
-					bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' ),
-					slider = $( '#swipebox-slider' );
+					bars = $( '#swipeboxkuu-top-bar, #swipeboxkuu-bottom-bar' ),
+					slider = $( '#swipeboxkuu-slider' );
 
 				bars.addClass( 'visible-bars' );
 				$this.setTimeout();
@@ -299,12 +299,12 @@
 				$( 'body' ).bind( 'touchstart', function( event ) {
 
 					$( this ).addClass( 'touching' );
-					index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
+					index = $( '#swipeboxkuu-slider .slide' ).index( $( '#swipeboxkuu-slider .slide.current' ) );
 					endCoords = event.originalEvent.targetTouches[0];
 					startCoords.pageX = event.originalEvent.targetTouches[0].pageX;
 					startCoords.pageY = event.originalEvent.targetTouches[0].pageY;
 
-					$( '#swipebox-slider' ).css( {
+					$( '#swipeboxkuu-slider' ).css( {
 						'-webkit-transform' : 'translate3d(' + currentX +'%, 0, 0)',
 						'transform' : 'translate3d(' + currentX + '%, 0, 0)'
 					} );
@@ -332,7 +332,7 @@
 						hDistancePercent = hDistance * 100 / winWidth;
 
 						if ( ! hSwipe && ! vSwipe && Math.abs( hDistance ) >= hSwipMinDistance ) {
-							$( '#swipebox-slider' ).css( {
+							$( '#swipeboxkuu-slider' ).css( {
 								'-webkit-transition' : '',
 								'transition' : ''
 							} );
@@ -347,11 +347,11 @@
 								// first slide
 								if ( 0 === index ) {
 									// console.log( 'first' );
-									$( '#swipebox-overlay' ).addClass( 'leftSpringTouch' );
+									$( '#swipeboxkuu-overlay' ).addClass( 'leftSpringTouch' );
 								} else {
 									// Follow gesture
-									$( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
-									$( '#swipebox-slider' ).css( {
+									$( '#swipeboxkuu-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
+									$( '#swipeboxkuu-slider' ).css( {
 										'-webkit-transform' : 'translate3d(' + ( currentX + hDistancePercent ) +'%, 0, 0)',
 										'transform' : 'translate3d(' + ( currentX + hDistancePercent ) + '%, 0, 0)'
 									} );
@@ -363,10 +363,10 @@
 								// last Slide
 								if ( elements.length === index +1 ) {
 									// console.log( 'last' );
-									$( '#swipebox-overlay' ).addClass( 'rightSpringTouch' );
+									$( '#swipeboxkuu-overlay' ).addClass( 'rightSpringTouch' );
 								} else {
-									$( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
-									$( '#swipebox-slider' ).css( {
+									$( '#swipeboxkuu-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
+									$( '#swipeboxkuu-slider' ).css( {
 										'-webkit-transform' : 'translate3d(' + ( currentX + hDistancePercent ) +'%, 0, 0)',
 										'transform' : 'translate3d(' + ( currentX + hDistancePercent ) + '%, 0, 0)'
 									} );
@@ -382,7 +382,7 @@
 					event.preventDefault();
 					event.stopPropagation();
 
-					$( '#swipebox-slider' ).css( {
+					$( '#swipeboxkuu-slider' ).css( {
 						'-webkit-transition' : '-webkit-transform 0.4s ease',
 						'transition' : 'transform 0.4s ease'
 					} );
@@ -431,12 +431,12 @@
 						}
 					}
 
-					$( '#swipebox-slider' ).css( {
+					$( '#swipeboxkuu-slider' ).css( {
 						'-webkit-transform' : 'translate3d(' + currentX + '%, 0, 0)',
 						'transform' : 'translate3d(' + currentX + '%, 0, 0)'
 					} );
 
-					$( '#swipebox-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
+					$( '#swipeboxkuu-overlay' ).removeClass( 'leftSpringTouch' ).removeClass( 'rightSpringTouch' );
 					$( '.touching' ).off( 'touchmove' ).removeClass( 'touching' );
 
 				} );
@@ -470,12 +470,12 @@
 			 * Show navigation and title bars
 			 */
 			showBars : function () {
-				var bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' );
+				var bars = $( '#swipeboxkuu-top-bar, #swipeboxkuu-bottom-bar' );
 				if ( this.doCssTrans() ) {
 					bars.addClass( 'visible-bars' );
 				} else {
-					$( '#swipebox-top-bar' ).animate( { top : 0 }, 500 );
-					$( '#swipebox-bottom-bar' ).animate( { bottom : 0 }, 500 );
+					$( '#swipeboxkuu-top-bar' ).animate( { top : 0 }, 500 );
+					$( '#swipeboxkuu-bottom-bar' ).animate( { bottom : 0 }, 500 );
 					setTimeout( function() {
 						bars.addClass( 'visible-bars' );
 					}, 1000 );
@@ -486,12 +486,12 @@
 			 * Hide navigation and title bars
 			 */
 			hideBars : function () {
-				var bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' );
+				var bars = $( '#swipeboxkuu-top-bar, #swipeboxkuu-bottom-bar' );
 				if ( this.doCssTrans() ) {
 					bars.removeClass( 'visible-bars' );
 				} else {
-					$( '#swipebox-top-bar' ).animate( { top : '-50px' }, 500 );
-					$( '#swipebox-bottom-bar' ).animate( { bottom : '-50px' }, 500 );
+					$( '#swipeboxkuu-top-bar' ).animate( { top : '-50px' }, 500 );
+					$( '#swipeboxkuu-bottom-bar' ).animate( { bottom : '-50px' }, 500 );
 					setTimeout( function() {
 						bars.removeClass( 'visible-bars' );
 					}, 1000 );
@@ -503,19 +503,19 @@
 			 */
 			animBars : function () {
 				var $this = this,
-					bars = $( '#swipebox-top-bar, #swipebox-bottom-bar' );
+					bars = $( '#swipeboxkuu-top-bar, #swipeboxkuu-bottom-bar' );
 
 				bars.addClass( 'visible-bars' );
 				$this.setTimeout();
 
-				$( '#swipebox-slider' ).click( function() {
+				$( '#swipeboxkuu-slider' ).click( function() {
 					if ( ! bars.hasClass( 'visible-bars' ) ) {
 						$this.showBars();
 						$this.setTimeout();
 					}
 				} );
 
-				$( '#swipebox-bottom-bar' ).hover( function() {
+				$( '#swipeboxkuu-bottom-bar' ).hover( function() {
 					$this.showBars();
 					bars.addClass( 'visible-bars' );
 					$this.clearTimeout();
@@ -562,21 +562,21 @@
 
 				if ( elements.length < 2 ) {
 
-					$( '#swipebox-bottom-bar' ).hide();
+					$( '#swipeboxkuu-bottom-bar' ).hide();
 
 					if ( undefined === elements[ 1 ] ) {
-						$( '#swipebox-top-bar' ).hide();
+						$( '#swipeboxkuu-top-bar' ).hide();
 					}
 
 				} else {
-					$( '#swipebox-prev' ).bind( action, function( event ) {
+					$( '#swipeboxkuu-prev' ).bind( action, function( event ) {
 						event.preventDefault();
 						event.stopPropagation();
 						$this.getPrev();
 						$this.setTimeout();
 					} );
 
-					$( '#swipebox-next' ).bind( action, function( event ) {
+					$( '#swipeboxkuu-next' ).bind( action, function( event ) {
 						event.preventDefault();
 						event.stopPropagation();
 						$this.getNext();
@@ -584,7 +584,7 @@
 					} );
 				}
 
-				$( '#swipebox-close' ).bind( action, function() {
+				$( '#swipeboxkuu-close' ).bind( action, function() {
 					$this.closeSlide();
 				} );
 			},
@@ -596,7 +596,7 @@
 
 				isFirst = isFirst || false;
 
-				var slider = $( '#swipebox-slider' );
+				var slider = $( '#swipeboxkuu-slider' );
 
 				currentX = -index*100;
 
@@ -609,20 +609,20 @@
 					slider.animate( { left : ( -index*100 )+'%' } );
 				}
 
-				$( '#swipebox-slider .slide' ).removeClass( 'current' );
-				$( '#swipebox-slider .slide' ).eq( index ).addClass( 'current' );
+				$( '#swipeboxkuu-slider .slide' ).removeClass( 'current' );
+				$( '#swipeboxkuu-slider .slide' ).eq( index ).addClass( 'current' );
 				this.setTitle( index );
 
 				if ( isFirst ) {
 					slider.fadeIn();
 				}
 
-				$( '#swipebox-prev, #swipebox-next' ).removeClass( 'disabled' );
+				$( '#swipeboxkuu-prev, #swipeboxkuu-next' ).removeClass( 'disabled' );
 
 				if ( index === 0 ) {
-					$( '#swipebox-prev' ).addClass( 'disabled' );
+					$( '#swipeboxkuu-prev' ).addClass( 'disabled' );
 				} else if ( index === elements.length - 1 && plugin.settings.loopAtEnd !== true ) {
-					$( '#swipebox-next' ).addClass( 'disabled' );
+					$( '#swipeboxkuu-next' ).addClass( 'disabled' );
 				}
 			},
 
@@ -630,15 +630,15 @@
 			 * Open slide
 			 */
 			openSlide : function ( index ) {
-				$( 'html' ).addClass( 'swipebox-html' );
+				$( 'html' ).addClass( 'swipeboxkuu-html' );
 				if ( isTouch ) {
-					$( 'html' ).addClass( 'swipebox-touch' );
+					$( 'html' ).addClass( 'swipeboxkuu-touch' );
 
 					if ( plugin.settings.hideCloseButtonOnMobile ) {
-						$( 'html' ).addClass( 'swipebox-no-close-button' );
+						$( 'html' ).addClass( 'swipeboxkuu-no-close-button' );
 					}
 				} else {
-					$( 'html' ).addClass( 'swipebox-no-touch' );
+					$( 'html' ).addClass( 'swipeboxkuu-no-touch' );
 				}
 				$( window ).trigger( 'resize' ); // fix scroll bar visibility on desktop
 				this.setSlide( index, true );
@@ -680,7 +680,7 @@
 					return false;
 				}
 
-				slide = $( '#swipebox-slider .slide' ).eq( index );
+				slide = $( '#swipeboxkuu-slider .slide' ).eq( index );
 
 				if ( ! $this.isVideo( src ) ) {
 					slide.addClass( 'slide-loading' );
@@ -708,17 +708,17 @@
 			setTitle : function ( index ) {
 				var title = null;
 
-				$( '#swipebox-title' ).empty();
+				$( '#swipeboxkuu-title' ).empty();
 
 				if ( elements[ index ] !== undefined ) {
 					title = elements[ index ].title;
 				}
 
 				if ( title ) {
-					$( '#swipebox-top-bar' ).show();
-					$( '#swipebox-title' ).append( title );
+					$( '#swipeboxkuu-top-bar' ).show();
+					$( '#swipeboxkuu-title' ).append( title );
 				} else {
-					$( '#swipebox-top-bar' ).hide();
+					$( '#swipeboxkuu-top-bar' ).hide();
 				}
 			},
 
@@ -732,7 +732,7 @@
 						return true;
 					}
 
-					if ( src.toLowerCase().indexOf( 'swipeboxvideo=1' ) >= 0 ) {
+					if ( src.toLowerCase().indexOf( 'swipeboxkuuvideo=1' ) >= 0 ) {
 
 						return true;
 					}
@@ -804,7 +804,7 @@
 					iframe = '<iframe width="560" height="315" src="' + url + '" frameborder="0" allowfullscreen></iframe>';
 				}
 
-				return '<div class="swipebox-video-container" style="max-width:' + plugin.settings.videoMaxWidth + 'px"><div class="swipebox-video">' + iframe + '</div></div>';
+				return '<div class="swipeboxkuu-video-container" style="max-width:' + plugin.settings.videoMaxWidth + 'px"><div class="swipeboxkuu-video">' + iframe + '</div></div>';
 			},
 
 			/**
@@ -815,7 +815,7 @@
                 if ( src.trim().indexOf('#') === 0 ) {
                     callback.call(
                     	$('<div>', {
-                    		'class' : 'swipebox-inline-container'
+                    		'class' : 'swipeboxkuu-inline-container'
                     	})
                     	.append(
                     		$(src)
@@ -842,11 +842,11 @@
 			getNext : function () {
 				var $this = this,
 					src,
-					index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) );
+					index = $( '#swipeboxkuu-slider .slide' ).index( $( '#swipeboxkuu-slider .slide.current' ) );
 				if ( index + 1 < elements.length ) {
 
-					src = $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src' );
-					$( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
+					src = $( '#swipeboxkuu-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src' );
+					$( '#swipeboxkuu-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
 					index++;
 					$this.setSlide( index );
 					$this.preloadMedia( index+1 );
@@ -856,8 +856,8 @@
 				} else {
 
 					if ( plugin.settings.loopAtEnd === true ) {
-						src = $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src' );
-						$( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
+						src = $( '#swipeboxkuu-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src' );
+						$( '#swipeboxkuu-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
 						index = 0;
 						$this.preloadMedia( index );
 						$this.setSlide( index );
@@ -866,9 +866,9 @@
 							plugin.settings.nextSlide(index);
 						}
 					} else {
-						$( '#swipebox-overlay' ).addClass( 'rightSpring' );
+						$( '#swipeboxkuu-overlay' ).addClass( 'rightSpring' );
 						setTimeout( function() {
-							$( '#swipebox-overlay' ).removeClass( 'rightSpring' );
+							$( '#swipeboxkuu-overlay' ).removeClass( 'rightSpring' );
 						}, 500 );
 					}
 				}
@@ -878,11 +878,11 @@
 			 * Get previous slide
 			 */
 			getPrev : function () {
-				var index = $( '#swipebox-slider .slide' ).index( $( '#swipebox-slider .slide.current' ) ),
+				var index = $( '#swipeboxkuu-slider .slide' ).index( $( '#swipeboxkuu-slider .slide.current' ) ),
 					src;
 				if ( index > 0 ) {
-					src = $( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe').attr( 'src' );
-					$( '#swipebox-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
+					src = $( '#swipeboxkuu-slider .slide' ).eq( index ).contents().find( 'iframe').attr( 'src' );
+					$( '#swipeboxkuu-slider .slide' ).eq( index ).contents().find( 'iframe' ).attr( 'src', src );
 					index--;
 					this.setSlide( index );
 					this.preloadMedia( index-1 );
@@ -890,9 +890,9 @@
 						plugin.settings.prevSlide(index);
 					}
 				} else {
-					$( '#swipebox-overlay' ).addClass( 'leftSpring' );
+					$( '#swipeboxkuu-overlay' ).addClass( 'leftSpring' );
 					setTimeout( function() {
-						$( '#swipebox-overlay' ).removeClass( 'leftSpring' );
+						$( '#swipeboxkuu-overlay' ).removeClass( 'leftSpring' );
 					}, 500 );
 				}
 			},
@@ -909,8 +909,8 @@
 			 * Close
 			 */
 			closeSlide : function () {
-				$( 'html' ).removeClass( 'swipebox-html' );
-				$( 'html' ).removeClass( 'swipebox-touch' );
+				$( 'html' ).removeClass( 'swipeboxkuu-html' );
+				$( 'html' ).removeClass( 'swipeboxkuu-touch' );
 				$( window ).trigger( 'resize' );
 				this.destroy();
 			},
@@ -923,15 +923,15 @@
 				$( 'body' ).unbind( 'touchstart' );
 				$( 'body' ).unbind( 'touchmove' );
 				$( 'body' ).unbind( 'touchend' );
-				$( '#swipebox-slider' ).unbind();
-				$( '#swipebox-overlay' ).remove();
+				$( '#swipeboxkuu-slider' ).unbind();
+				$( '#swipeboxkuu-overlay' ).remove();
 
 				if ( ! $.isArray( elem ) ) {
-					elem.removeData( '_swipebox' );
+					elem.removeData( '_swipeboxkuu' );
 				}
 
 				if ( this.target ) {
-					this.target.trigger( 'swipebox-destroy' );
+					this.target.trigger( 'swipeboxkuu-destroy' );
 				}
 
 				$.swipeboxkuu.isOpen = false;
@@ -947,11 +947,11 @@
 
 	$.fn.swipeboxkuu = function( options ) {
 
-		if ( ! $.data( this, '_swipebox' ) ) {
-			var swipebox = new $.swipeboxkuu( this, options );
-			this.data( '_swipebox', swipebox );
+		if ( ! $.data( this, '_swipeboxkuu' ) ) {
+			var swipeboxkuu = new $.swipeboxkuu( this, options );
+			this.data( '_swipeboxkuu', swipeboxkuu );
 		}
-		return this.data( '_swipebox' );
+		return this.data( '_swipeboxkuu' );
 
 	};
 
